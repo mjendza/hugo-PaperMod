@@ -102,19 +102,25 @@
 {{- end }}
 {{- end }}
 
+{{- if hugo.IsProduction | or (eq site.Params.env "production") | and (ne .Params.robotsNoIndex true) }}
+
 
 {{- /* Cookiebot.js */}}
 <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="5d9214cf-2bf1-4d9c-80bc-5d2c45d1707d" data-blockingmode="auto" type="text/javascript"></script>
+{{- end }}
 
+{{- if hugo.IsProduction | or (eq site.Params.env "production") | and (ne .Params.robotsNoIndex true) }}
 {{- /* Google tag.js */}}
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-B719FYBMQS"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-  gtag('config', 'G-B719FYBMQS');
+    gtag('config', 'G-B719FYBMQS');
 </script>
+{{- end }}
+
 
 {{- /* Favicons */}}
 <link rel="icon" href="{{ site.Params.assets.favicon | default "favicon.ico" | absURL }}">
